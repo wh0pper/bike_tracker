@@ -4,12 +4,13 @@ describe('Stolen', function() {
   var stolen;
 
   beforeEach(function() {
-    stolen = new Stolen(portland);
+    stolen = new Stolen('portland');
   });
 
   it('makes request to bike index api to return all stolen bikes for a city', function() {
+    // console.log(stolen.makeRequest());
     let response = stolen.makeRequest()
-    expect(response.bikes).not.toEqual(null);
+    expect(stolen.makeRequest()).not.toEqual(null);
   })
 
 
