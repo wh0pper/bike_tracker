@@ -1,14 +1,14 @@
 import $ from 'jquery';
 
 export class Stolen {
-  constructor(city) {
-    this.city = city;
-    // this.
+  constructor(parameters) {
+    this.city = parameters.city;
+    this.color = parameters.color;
     // this.response = '';
   }
 
   makeRequest(displayData) {
-     let url = `https://bikeindex.org:443/api/v3/search?page=1&per_page=15&location=${this.city}&distance=25&stolenness=proximity&appid=f45e92290a73a41883482ba2cd230e55a258f5ec1e629825dc88f7c7ac63cd20&secret=2e7ef95d12847833adb4fdfab1464760bdb9b509ad17e4558294aaa8ed162263`;
+     let url = `https://bikeindex.org:443/api/v3/search?page=1&per_page=15&location=${this.city}&distance=25&stolenness=proximity&frame_colors=${this.color}appid=f45e92290a73a41883482ba2cd230e55a258f5ec1e629825dc88f7c7ac63cd20&secret=2e7ef95d12847833adb4fdfab1464760bdb9b509ad17e4558294aaa8ed162263`;
     $.get(url).then(function(results) {
       displayData(results);
     }).fail(function() {

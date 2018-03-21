@@ -16,13 +16,14 @@ var displayDataColors = function(results) {
 }
 
 $(document).ready(function() {
+  let parameters = {'city': '*', 'color': '*'};
   $('#formLocation').submit(function(event) {
     event.preventDefault();
     $(".bikeList").text('');
     let city = $('#city').val();
-    console.log(city)
-    let stolen = new Stolen(city);
-    stolen.makeRequest(displayData)
+    parameters.city = city;
+    let stolen = new Stolen(parameters);
+    stolen.makeRequest(displayData);
 
     // $.get(stolen.makeRequest()).then(function(response) {
     //   console.log(stolen,22)
@@ -34,10 +35,12 @@ $(document).ready(function() {
   });
 
   $('#formColor').submit(function(event) {
+    console.log(parameters);
     event.preventDefault();
     $('.bikeListColor').text('');
     let color = $('#color').val();
-    let stolen2 = new Stolen(color)
+    parameters.color = color;
+    let stolen2 = new Stolen(parameters);
   })
 
 
