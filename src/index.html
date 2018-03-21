@@ -5,14 +5,19 @@
     <title>Bike Finder</title>
   </head>
   <body>
-    <h3>Find your bike using the api</h3>
+    <h3>Find your bike using the Bike Index API</h3>
+    <hr>
     <form id='formLocation'>
-      <label for="city">Enter your city</label>
+      <label for="city">Enter your city or zip code:</label>
       <input type="text" name="city" id='city'>
       <button type="submit" name="button">Submit</button>
     </form>
-    <div class="bikeList">
-
-    </div>
+    <form id='formColor'>
+      <label for="color">Enter your bike color</label>
+      <input type="text" name="color" id='color'>
+      <button type="submit" name="button">Submit</button>
+    </form>
+    <div class="bikeList"></div>
+    <div class="bikeListColor"></div>
   </body>
 </html>
