@@ -2,28 +2,47 @@ import $ from 'jquery';
 import { Stolen } from './stolen'
 
 var displayData = function(results) {
-  $(".bikeList").append('15 most recently stolen bikes near your location:')
-  results.bikes.forEach(function(bike) {
-    $(".bikeList").append('<li>' + bike.title + ', ' + bike.stolen_location + '</li>');
-  });
-}
+  if (results.bikes.length == 0) {
+    $(".bikeList").text('No matches');
+  } else {
+    $(".bikeList").text('15 most recently stolen bikes matching your search:')
+    results.bikes.forEach(function(bike) {
+      $(".bikeList").append('<li>' + bike.title + ', ' + bike.stolen_location + ', ' + bike.frame_colors +', ' + bike.manufacturer_name +', ' + bike.serial +'</li>');
+      });
+    }
+  }
 
-var displayDataColors = function(results) {
-  $(".bikeListColor").append('list of bikes stolen that are a certain color');
-  results.bikes.forEach(function(bike) {
-    $("bikeListColor").append('<li>'+bike.title+" "+bike.frame_colors+'</li>')
-  });
-}
+  var displaySearch = function() {
+    $(".bikeList").text('Finding results...')
+  }
+
+  var errorMessageUser = function() {
+    $(".bikeList").text('There was an error processing your request.');
+  }
 
 $(document).ready(function() {
-  let parameters = {'city': '*', 'color': '*'};
   $('#formLocation').submit(function(event) {
+    let parameters = {'city': '*', 'color': '', 'manufacturer': ''};
     event.preventDefault();
     $(".bikeList").text('');
     let city = $('#city').val();
-    parameters.city = city;
+    let color = $('#color').val();
+    let manufacturer = $('#manufacturer').val();
+    // let serial = $('#serial').val();
+    if (city.length > 0) {
+      parameters.city = city;
+    }
+    if (color.length > 0) {
+      parameters.color = color;
+    }
+    if (manufacturer.length > 0) {
+      parameters.manufacturer = manufacturer;
+    }
+    // if (serial.length > 0) {
+    //     parameters.serial = serial;
+    // }
     let stolen = new Stolen(parameters);
-    stolen.makeRequest(displayData);
+    stolen.makeRequest(displayData,displaySearch,errorMessageUser);
 
     // $.get(stolen.makeRequest()).then(function(response) {
     //   console.log(stolen,22)
@@ -33,15 +52,5 @@ $(document).ready(function() {
     //   console.log('failed error');
     // });
   });
-
-  $('#formColor').submit(function(event) {
-    console.log(parameters);
-    event.preventDefault();
-    $('.bikeListColor').text('');
-    let color = $('#color').val();
-    parameters.color = color;
-    let stolen2 = new Stolen(parameters);
-  })
-
 
 });
