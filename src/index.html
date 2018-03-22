@@ -33,10 +33,11 @@
       function initMap() {
 
         var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 1,
-          center: {lat: 37.3904943, lng: -121.8854337}
+          zoom: 5,
+          center: {lat: 47.3904943, lng: -121.8854337}
         });
         document.getElementById('mapButton').onclick=function() {
+          map.panTo({lat: window.latLongArray[0].lat, lng: window.latLongArray[0].lng});
           window.latLongArray.forEach(function(pair) {
             var thisPosition = {lat: pair.lat, lng: pair.lng};
             console.log(thisPosition);
