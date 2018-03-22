@@ -1,3 +1,7 @@
+// BIKE_API_KEY=f45e92290a73a41883482ba2cd230e55a258f5ec1e629825dc88f7c7ac63cd20
+// BIKE_SECRET=2e7ef95d12847833adb4fdfab1464760bdb9b509ad17e4558294aaa8ed162263
+//
+//GOOGLE_API_KEY=
 import $ from 'jquery';
 import { Stolen } from './stolen'
 export let stolen;
