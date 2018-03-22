@@ -3,6 +3,16 @@
   <head>
     <meta charset="utf-8">
     <title>Bike Finder</title>
+    <style>
+       #map {
+        height: 400px;
+        width: 100%;
+       }
+    </style>
+    <script>
+      window.latLongArray = [];
+      window.zipCodeArray = [];
+    </script>
   </head>
   <body>
     <h3>Find your bike using the Bike Index API</h3>
@@ -14,22 +24,33 @@
       <input type="text" name="color" id='color'>
       <label for="manufacturer">Enter your bike manufacturer</label>
       <input type="text" name="manufacturer" id='manufacturer'>
-      <!-- <label for="serial">Enter your bike serial</label>
-      <input type="text" name="serial" id='serial'> -->
       <button type="submit" name="button">Submit</button>
     </form>
-    <!-- <form id='formColor'>
-      <label for="color">Enter your city</label>
-      <input type="text" name="color" id='color'>
-      <label for="color">Enter your bike color</label>
-      <input type="text" name="color" id='color'>
-      <label for="color">Enter your bike color</label>
-      <input type="text" name="color" id='color'>
-      <label for="color">Enter your bike color</label>
-      <input type="text" name="color" id='color'>
-      <button type="submit" name="button">Submit</button>
-    </form> -->
     <div class="bikeList"></div>
-    <div class="bikeListColor"></div>
+    <div id="map"></div>
+    <script>
+
+      function initMap() {
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 1,
+          center: {lat: 37.3904943, lng: -121.8854337}
+        });
+        document.getElementById('mapButton').onclick=function() {
+          window.latLongArray.forEach(function(pair) {
+            var thisPosition = {lat: pair.lat, lng: pair.lng};
+            console.log(thisPosition);
+            var marker = new google.maps.Marker({
+              position: thisPosition,
+              map: map
+            });
+          })
+        }
+      }
+    </script>
+    <script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLb3lryd4_CSo0ysdcSU81waN78i1qqhM&callback=initMap"></script>
+
+  <button id='mapButton'>Map thefts</button>
   </body>
 </html>
